@@ -33,7 +33,7 @@ public class ConexaoDAO {
             String database = "logina3";
             String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
-            String password = "natajo1966";
+            String password = "rootpassword";
 
             connection = DriverManager.getConnection(url, user, password);
 
