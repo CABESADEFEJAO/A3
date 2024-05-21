@@ -1,11 +1,13 @@
 package View;
 
-import DAO.UsuarioDAO;
+//import DAO.UsuarioDAO;
 import Model.Usuario;
-import View.TelaPrincipalFakezada;
+import View.TelaLogin;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -17,11 +19,12 @@ import java.sql.ResultSet;
  */
 public class TelaCadastro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaLogin
-     */
+    private Usuario objetousuario;
+
     public TelaCadastro() {
         initComponents();
+        this.objetousuario = new Usuario();
+
     }
 
     /**
@@ -121,8 +124,41 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnCadastrarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarUserActionPerformed
-     
+
+        try {
+            // recebendo e validando dados da interface gr�fica.
+            String nome_usuario = "";
+            String senha_usuario = "";
+
+            if (this.txtSetUsuario.getText().length() < 2) {
+                JOptionPane.showInputDialog(null, "Nome deve conter ao menos 2 caracteres.");
+            } else {
+                nome_usuario = txtSetUsuario.getText();
+            }
+            if (this.txtSetSenha.getText().length() < 2) {
+                JOptionPane.showInputDialog(null, "Senha deve conter ao menos 2 caracteres.");
+            } else {
+                senha_usuario = txtSetSenha.getText();
+            }
+
+            if (this.objetousuario.InserUsuarioBD(nome_usuario, senha_usuario)) {
+                JOptionPane.showMessageDialog(rootPane, "Usuário Cadastrado com Sucesso!");
+
+                // limpa campos da interface
+                this.txtSetUsuario.setText("");
+                this.txtSetSenha.setText("");
     }//GEN-LAST:event_btnCadastrarUserActionPerformed
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Erro");
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        new TelaLogin().setVisible(true);
+        dispose();
+
+    }
+
 
     private void txtSetUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSetUsuarioActionPerformed
         // TODO add your handling code here:
@@ -179,5 +215,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    }
-
+//    private class objetousuario {
+//
+//        public objetousuario() {
+//        }
+//    }
+}

@@ -176,14 +176,13 @@ public class TelaLogin extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-
     private void Logar() {
         try {
             String nome_usuario, senha_usuario;
 
             nome_usuario = txtUsuario.getText();
             senha_usuario = txtSenha.getText();
-           
+
             Usuario objetousuario = new Usuario(nome_usuario, senha_usuario);
             objetousuario.setNome_usuario(nome_usuario);
             objetousuario.setSenha_usuario(senha_usuario);

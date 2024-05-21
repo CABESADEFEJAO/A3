@@ -9,9 +9,15 @@ import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
+
+    public static ArrayList<Usuario> MinhaLista = new ArrayList<Usuario>();
+
+    public UsuarioDAO() {
+    }
 
     Connection connection;
 
@@ -39,13 +45,12 @@ public class UsuarioDAO {
         connection = new ConexaoDAO().getConexao();
 
         try {
-            String sql = "INSERT INTO login_tb(nome_usuario, senha_usuario) VALUES(?,?,)";
+            String sql = "INSERT INTO login_tb(nome_usuario, senha_usuario) VALUES(?,?)";
 
-          PreparedStatement pstm = connection.prepareStatement(sql);
+            PreparedStatement pstm = connection.prepareStatement(sql);
 
-       
-           pstm.setString(1, objeto.getNome_usuario());
-            pstm.setString(1, objeto.getSenha_usuario());
+            pstm.setString(1, objeto.getNome_usuario());
+            pstm.setString(2, objeto.getSenha_usuario());
 
             pstm.execute();
             pstm.close();
